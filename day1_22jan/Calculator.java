@@ -16,7 +16,7 @@ public class Calculator {
         System.out.println("Multiplication Without return type and static: " + (a * b));
     }
 
-    // 4. Without return type and non-static
+    // 4. Without return type and non-static.
     public void divide(int a, int b) {
         if (b != 0) {
             System.out.println("Division Without return type and non-static: " + (a / b));
