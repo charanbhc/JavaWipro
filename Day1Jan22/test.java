@@ -1,4 +1,4 @@
-package day1_22jan;
+package Day1Jan22;
 public class test {
     //with return static
     public static int add(int a,int b){

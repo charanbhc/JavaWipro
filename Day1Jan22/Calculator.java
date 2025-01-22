@@ -1,4 +1,4 @@
-package day1_22jan;
+package Day1Jan22;
 public class Calculator {
 
     // 1. With return type and static
