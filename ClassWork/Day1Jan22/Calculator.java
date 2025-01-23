@@ -1,4 +1,4 @@
-package Class.Day1Jan22;
+package ClassWork.Day1Jan22;
 public class Calculator {
 
     // 1. With return type and static

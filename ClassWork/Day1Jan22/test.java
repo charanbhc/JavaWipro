@@ -1,4 +1,4 @@
-package Class.Day1Jan22;
+package ClassWork.Day1Jan22;
 public class test {
     //with return static
     public static int add(int a,int b){

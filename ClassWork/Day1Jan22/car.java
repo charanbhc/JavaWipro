@@ -1,4 +1,4 @@
-package Class.Day1Jan22;
+package ClassWork.Day1Jan22;
 public class car { // Class name should start with an uppercase letter (convention)
     int i = 10; // Instance variable
     static int k = 18; // Static variable
