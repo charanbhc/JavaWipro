@@ -12,7 +12,7 @@ public class Createdatabase {
 		try {
 			
 			Class.forName("com.mysql.jdbc.Driver");//Register the driver
-			Connection con= DriverManager.getConnection("jdbc:mysql://localhost:3306/", "root","chiranjeevi@12345"); //Database create connection
+			Connection con= DriverManager.getConnection("jdbc:mysql://localhost:3306/", "root","12345678"); //Database create connection
 			Statement stmt = con.createStatement();//create statemt
 			 String sql = "DROP DATABASE wiproDemo";//create database daabase name;
 			 stmt.executeUpdate(sql);
