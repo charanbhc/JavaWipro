@@ -5,5 +5,7 @@
 	<classpathentry kind="src" path="Assignment/WiproDemo"/>
 	<classpathentry kind="src" path="Assignment/Day3Jan24"/>
 	<classpathentry kind="src" path="Assignment/Wipro file"/>
+	<classpathentry kind="src" path="WiproDemo"/>
+	<classpathentry kind="src" path="Assignment/Day4Jan27/WiproDemo"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
