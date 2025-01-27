@@ -1,14 +1,34 @@
-class Shadowing {
-    int x = 10; // Class-level variable
+public class Shadowing 
+{
+    int num = 10;
 
-    void method() {
-        int x = 20; // Method-level variable
-        System.out.println("Method-level x: " + x);
+    public void methodLevelShadowing() 
+    {
+        int num = 20;
+
+        System.out.println("Inside methodLevelShadowing - Local num: " + num);  
+        System.out.println("Inside methodLevelShadowing - Instance num: " + this.num);
     }
 
-    public static void main(String[] args) {
+    public void blockLevelShadowing() 
+    {
+        int num = 30;
+
+        {
+            int num1 = 40; 
+            System.out.println("Inside blockLevelShadowing - Block-level num: " + num1);
+        }
+
+        System.out.println("Inside blockLevelShadowing - Method-level num: " + num);  
+        System.out.println("Inside blockLevelShadowing - Instance num: " + this.num); 
+    }
+
+    public static void main(String[] args) 
+    {
         Shadowing obj = new Shadowing();
-        System.out.println("Class-level x: " + obj.x);
-        obj.method();
+
+        obj.methodLevelShadowing();
+
+        obj.blockLevelShadowing();
     }
 }

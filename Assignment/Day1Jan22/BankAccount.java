@@ -1,45 +1,62 @@
-class BankAccount {
-    String name;
-    double accountNumber;
-    double balance;
 
-    void deposit(double amount) {
+public class BankAccount 
+{
+    private String accountHolderName;
+    private String accountNumber;
+    private double balance;
+
+    public BankAccount(String accountHolderName, String accountNumber, double initialBalance)
+    {
+        this.accountHolderName = accountHolderName;
+        this.accountNumber = accountNumber;
+        this.balance = initialBalance;
+    }
+    public void deposit(double amount) 
+    {
         if (amount > 0) {
             balance += amount;
             System.out.println("Deposited: " + amount);
         } else {
-            System.out.println("Invalid deposit amount.");
+            System.out.println("Invalid deposit amount");
         }
     }
-
-    void withdraw(double amount) {
-        if (amount > 0 && amount <= balance) {
+    public void withdraw(double amount) 
+    {
+        if (amount > 0 && amount <= balance) 
+        {
             balance -= amount;
             System.out.println("Withdrew: " + amount);
-        } else {
-            System.out.println("Invalid withdraw amount or insufficient balance.");
+        } 
+        else if (amount > balance) 
+        {
+            System.out.println("Insufficient funds");
+        } 
+        else 
+        {
+            System.out.println("Invalid withdrawal amount");
         }
     }
-
-    void checkBalance() {
+    public void checkBalance() 
+    {
         System.out.println("Current Balance: " + balance);
     }
-
-    void displayDetails() {
-        System.out.println("Account Holder: " + name);
+    public void getAccountDetails() 
+    {
+        System.out.println("Account Holder: " + accountHolderName);
         System.out.println("Account Number: " + accountNumber);
-        System.out.println("Current Balance: " + balance);
     }
+    public static void main(String[] args) 
+    {
+        BankAccount account = new BankAccount("Ajay", "123456789", 1000.0);
 
-    public static void main(String[] args) {
-        BankAccount account = new BankAccount();
-        account.name = " Venkata charishma";
-        account.accountNumber = 123456789;
-        account.balance = 0;
+        account.getAccountDetails();
 
-        account.deposit(5000);
-        account.withdraw(3000);
         account.checkBalance();
-        account.displayDetails();
+
+        account.deposit(500.0);
+
+        account.withdraw(200.0);
+
+        account.checkBalance();
     }
 }
