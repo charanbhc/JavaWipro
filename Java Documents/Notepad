@@ -1,0 +1,9 @@
+//Run the program in terminal
+
+cd /Users/charanbhc/JavaWipro/Assignment/Day5Jan28/
+
+ls
+
+javac DateTimeExample.java 
+
+java DateTimeExample.java 

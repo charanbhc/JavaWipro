@@ -1,0 +1,7 @@
+(base) charanbhc@Charans-MacBook-Air Day5Jan28 % java OptionalExample.java
+
+
+Optional.ofNullable(): Value is null
+Optional.ofNullable() with non-null: Hello, World!
+Optional.of(): Java
+Optional.of() throws NullPointerException when the value is null

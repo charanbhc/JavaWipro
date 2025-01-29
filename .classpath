@@ -9,5 +9,6 @@
 	<classpathentry kind="src" path="Assignment/Day4Jan27/WiproDemo"/>
 	<classpathentry kind="src" path="Assignment/Day4Jan27/GitTask"/>
 	<classpathentry excluding="WiproDemo/|GitTask/" kind="src" path="Assignment/Day4Jan27"/>
+	<classpathentry kind="src" path="Assignment/Day5Jan28"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
