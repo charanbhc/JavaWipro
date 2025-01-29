@@ -1,0 +1,42 @@
+(base) charanbhc@Charans-MacBook-Air JavaWipro % cd /Users/charanbhc/JavaWipro/Assignment/Day4Jan27/
+
+
+(base) charanbhc@Charans-MacBook-Air Day4Jan27 % ls
+EmployeeOperations.java
+
+
+(base) charanbhc@Charans-MacBook-Air Day4Jan27 % javac EmployeeOperations.java
+
+
+(base) charanbhc@Charans-MacBook-Air Day4Jan27 % java EmployeeOperations
+
+
+Highest Salary Employee: Employee{name='David', salary=8000.0, department='Marketing'}
+
+
+Employees with Salary > 5000: [Employee{name='Alice', salary=7000.0, department='HR'}, Employee{name='Charlie', salary=5500.0, department='Engineering'}, Employee{name='David', salary=8000.0, department='Marketing'}]
+
+
+Employee Names and Salaries: [Alice - 7000.0, Bob - 4000.0, Charlie - 5500.0, David - 8000.0, Eva - 5000.0, Frank - 4500.0]
+
+
+Total Number of Employees: 6
+
+
+Employees Grouped by Department: {Engineering=[Employee{name='Bob', salary=4000.0, department='Engineering'}, Employee{name='Charlie', salary=5500.0, department='Engineering'}, Employee{name='Frank', salary=4500.0, department='Engineering'}], HR=[Employee{name='Alice', salary=7000.0, department='HR'}, Employee{name='Eva', salary=5000.0, department='HR'}], Marketing=[Employee{name='David', salary=8000.0, department='Marketing'}]}
+
+
+Average Salary: 5666.666666666667
+
+
+Employees Sorted by Salary: [Employee{name='Bob', salary=4000.0, department='Engineering'}, Employee{name='Frank', salary=4500.0, department='Engineering'}, Employee{name='Eva', salary=5000.0, department='HR'}, Employee{name='Charlie', salary=5500.0, department='Engineering'}, Employee{name='Alice', salary=7000.0, department='HR'}, Employee{name='David', salary=8000.0, department='Marketing'}]
+
+
+Second Highest Salary Employee: Employee{name='Alice', salary=7000.0, department='HR'}
+
+
+Employees Partitioned by Salary > 5000: {false=[Employee{name='Bob', salary=4000.0, department='Engineering'}, Employee{name='Eva', salary=5000.0, department='HR'}, Employee{name='Frank', salary=4500.0, department='Engineering'}], true=[Employee{name='Alice', salary=7000.0, department='HR'}, Employee{name='Charlie', salary=5500.0, department='Engineering'}, Employee{name='David', salary=8000.0, department='Marketing'}]}
+
+
+Employee with Longest Name: Employee{name='Charlie', salary=5500.0, department='Engineering'}
+
