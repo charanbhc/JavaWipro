@@ -1,0 +1,23 @@
+spring.application.name=RoyalEnfield
+
+#server.port=8090 Evertime your server start at this port.
+
+#location of Eureka Server.We are indicating that the Eureka server is running in our local machine.
+eureka.instance.hostname= ${vcap.application.uris[0]:localhost}
+
+#This means you will ip-address to connect to the Eureka Server.
+#RyalEnfield service will use the ipadress to communicate to the Eureka.
+#localhost gets converted to 127.0.0.1
+eureka.instance.prefer-ip-address=true
+
+#Every client is registered for some duration only. After that duration, it has to reregister
+#This specifies the time in which the client has to re-register
+# If renewal is not done, next registration request will be taken as fresh register
+eureka.instance.lease-renewal-interval-in-seconds=100
+
+#Duration of registration in seconds.Every 10 min it(service) has to re-register to Eureka server
+eureka.instance.lease-expiration-duration-in-seconds=600
+
+#URL of the Eureka Server. This client uses this URL to contact Eureka Server and register. 
+# Port of Eureka server.
+eureka.client.service-url.defaultZone=http://localhost:8761/eureka

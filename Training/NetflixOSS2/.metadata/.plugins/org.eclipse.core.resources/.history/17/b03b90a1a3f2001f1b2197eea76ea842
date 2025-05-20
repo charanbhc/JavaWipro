@@ -1,0 +1,23 @@
+package CartZoolGateway.CartZoolGateway;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class RouteController 
+{
+	// proxy api to find client information.
+	
+	@GetMapping("/show")
+	public String showItems(HttpServletRequest request)
+	{
+		// HttpServletRequest represents the request packet.
+		// Capture information about the client.
+		
+		System.out.println("Client Machine :" + request.getRemoteHost());
+		System.out.println("Client Address :" + request.getRemoteAddr());
+		return "";
+	}
+}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<canvas id="myCanvas" width="200" height="100" style="border:2px dashed #c3c3c3;">
+Your browser does not support the canvas element.
+</canvas>
+
+<script type="text/javascript">
+
+function drawShape()
+{
+    var c=document.getElementById("myCanvas");
+    var ctx=c.getContext("2d");
+    ctx.moveTo(10,10);       
+    ctx.lineTo(150,50);
+    ctx.lineTo(10,50);
+    ctx.stroke();             
+}
+
+</script>
+ 
+<button type="button" onclick="drawShape()"> Draw </button>
+
+</body>
+</html>
+

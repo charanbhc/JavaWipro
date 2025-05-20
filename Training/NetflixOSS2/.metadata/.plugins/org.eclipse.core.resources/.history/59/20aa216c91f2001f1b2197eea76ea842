@@ -1,0 +1,4 @@
+server.port=8001
+zuul.routes.Cart.url=http://localhost:8000
+zuul.routes.BackupCart.url=http://localhost:7999
+ribbon.eureka.enabled=false

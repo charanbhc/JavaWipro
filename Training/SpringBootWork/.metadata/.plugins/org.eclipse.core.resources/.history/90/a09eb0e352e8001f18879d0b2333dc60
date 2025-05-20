@@ -1,0 +1,38 @@
+package in.sp.main.service;
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import in.sp.main.entity.User;
+import in.sp.main.repository.UserRepository;
+
+
+@Service
+public class UserService 
+{
+	private UserRepository userRepository;
+    private final BCryptPasswordEncoder passwordEncoder;
+
+    public UserService(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
+    
+    public User registerUser(String username, String email, String password) {
+        String encodedPassword = passwordEncoder.encode(password);
+        User user = new User();
+        user.setUsername(username);
+        user.setEmail(email);
+        user.setPassword(encodedPassword);
+        return userRepository.save(user);  // Save user in MySQL
+    }
+
+    public boolean authenticateUser(String username, String rawPassword) 
+    {
+        User user = userRepository.findByUsername(username).orElse(null);
+        if (user == null) {
+            return false; // User not found
+        }
+        return passwordEncoder.matches(rawPassword, user.getPassword());   // Verify password
+    }
+}

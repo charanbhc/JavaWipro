@@ -1,0 +1,15 @@
+server.port=12000
+hystrix.dashboard.proxy-stream-allow-list=localhost
+management.endpoint.hystrix.stream.enabled=true
+management.endpoint.health.enabled=true
+management.endpoint.info.enabled=true
+management.endpoints.web.exposure.include=hystrix.stream, info, health
+
+
+
+#By default, dashboard is execued on another machine and localhost is prohibited.
+#To allow localhost to open dashboard, do this setting.
+#Dashboard configuration. This will enable dashboard for Hystrix
+#If this is true, hystrix will constantly ping the instances and check it's status.
+#This configures endpoints for the Hystrix Dashboard.
+#Will format the administrative information into a report form. Generally HTML.

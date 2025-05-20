@@ -1,0 +1,41 @@
+package CartZoolGateway.CartZoolGateway;
+ 
+import java.io.IOException;
+ 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+ 
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+ 
+@RestController
+public class RouteController {
+	//Proxy APIs to find the client information
+	@GetMapping("/show")
+	public String showItems(HttpServletRequest  request, HttpServletResponse   response)
+			throws IOException, ServletException {
+		//HttpServletRequest represents the request packet.
+		//Capture information about the client.
+		System.out.println("Client machine : "  + request.getRemoteHost());//Returns the name of the client machine
+		System.out.println("Client address : "  + request.getRemoteAddr());//Returns the ipaddress of the client machine
+		System.out.println("Client's browser : " + request.getHeader("user-agent"));
+		String clientinfo=request.getHeader("user-agent");
+		/*"Hello this is Android OS, a stiff competetor to IPhone OS"
+		 * indexOf("Android") //14 or If not found it returns -1
+		 * indexOf("IPhone") //48 or If not found it returns -1
+		*/
+		if (clientinfo.indexOf("Android") >=0  || clientinfo.indexOf("IPhone") >=0) {
+			System.out.println("Access from mobile devices and tabs are not allowed");
+			return "<b>Access from mobile devices are not allowed</b>";
+		}else
+		{
+			//call the api
+			//Call the API
+			response.sendRedirect("http://localhost:9001/show");
+			return "<b>Redirecting......</b>";
+		}
+		}
+}
+ 
+ 

@@ -1,0 +1,10 @@
+#default http will be 8080
+server.port=9080
+#spring.security.user.name=admin
+#spring.security.user.password=admin001
+#It is not Secure Socket Layer
+spring.datasource.url=jdbc:mysql://localhost:3306/world?useSSL=false
+spring.datasource.driverClassName=com.mysql.cj.jdbc.Driver
+spring.datasource.username=root
+spring.datasource.passwd=Ajay@5292
+spring.datasource.platform=mysql

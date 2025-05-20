@@ -1,0 +1,36 @@
+<html>
+<body>
+<script type="text/javascript">
+		var x
+		var d = new Date()
+		var mycars = new Array()
+		mycars[0] = "Saab"
+		mycars[1] = "Volvo"
+		mycars[2] = "BMW"
+		mycars[3] = d.toString() //Date in string format
+		document.write("Before Loop<BR>");
+		//x contains the index no of the elements.
+		for (x in mycars) {
+			document.write(mycars[x] + "<br>")
+		}
+		var arr = [ 10, 20, 30, 40 ];
+		document.writeln(arr[0]);
+		document.writeln(arr[1]);
+		document.writeln(arr[2]);
+ 
+		//Associative arrays. You can use names instead of index numbers.
+		//Same as maps in java.
+		var mapnos = new Array();
+		mapnos["one"] = 1; //"One" is the key. 1 is the value
+		mapnos["two"] = 2; //"Two" is the key. 2 is the value
+		mapnos["hundred"] = 100;
+		mapnos["thousand"] = 1000;
+		document.writeln("<br>" + mapnos["one"]); //1
+		document.writeln(mapnos["hundred"]); //100
+		document.writeln(mapnos["two"]); //2
+		//for-of loop. This works exactly like for-each loop in java.
+		for(var v in  mapnos)
+			document.writeln("<br>" + v + " = " + mapnos[v]);
+</script>
+</body>
+</html>

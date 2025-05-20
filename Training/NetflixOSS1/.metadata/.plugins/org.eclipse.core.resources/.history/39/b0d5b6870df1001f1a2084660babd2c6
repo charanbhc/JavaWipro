@@ -1,0 +1,26 @@
+package SleuthZipkinServer.SleuthZipkinServer;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+@SpringBootApplication
+public class SleuthZipkinServerApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(SleuthZipkinServerApplication.class, args);
+    }
+}
+
+@RestController
+@RequestMapping("/Bikes")
+public class StoreInfo {
+
+	@RequestMapping(value="/info")
+	public String getStoreInfo()
+	{
+		return "Mumbai, Kolkotta, Chandigarh, Mysore, Patna, Nagpur, Jharkhand, Pune";
+	}
+}

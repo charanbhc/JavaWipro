@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JavaScript Events</title>
+  <style>
+    #mousePosition {
+      position: fixed;
+      bottom: 10px;
+      left: 10px;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      padding: 5px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<script>
+  // JavaScript functions. Use function keyword to create a function.
+  function changeStyle(){
+    console.log("Changing the style..... got the focus");
+    document.forms[0].playerName.style.backgroundColor = "red";
+  }
+
+  function undoStyle(){
+    console.log("Lost the focus... Undoing the style.");
+    document.forms[0].playerName.style.backgroundColor = "white";
+  }
+
+  function checkLength(){
+    var pName = document.forms[0].playerName.value;
+    var v = document.getElementById("error");
+    if (pName.length < 3){
+      v.innerHTML = "Length of name must be more than or equal to 3";
+      v.style.color = "red"; 
+    } else {
+      v.innerHTML = "Perfect....";
+      v.style.color = "green"; 
+    }
+  }
+
+  // Function to trace the mouse position
+  function traceMouse(event) {
+    var mouseX = event.clientX; // Get the mouse's X coordinate
+    var mouseY = event.clientY; // Get the mouse's Y coordinate
+    var position = document.getElementById("mousePosition");
+    position.innerHTML = "X: " + mouseX + ", Y: " + mouseY; // Display the coordinates
+    // console.log("Mouse Position: X = " + mouseX + ", Y = " + mouseY); // Log to the console
+  }
+
+  // Attach the mousemove event listener when the document is loaded
+  document.addEventListener("mousemove", traceMouse);
+</script>
+<body>
+  <center>
+    <form>
+      <label id="jevents">JavaScript Events</label><br><br>
+      <label>Font size</label>&nbsp;&nbsp;<input type="number" value="10" min="10" max="75" /><br><br>
+      <!-- Event handling -->
+      <input type="text" value="Unknown" name="playerName" onfocus="changeStyle()" onblur="undoStyle()" oninput="checkLength()" />
+      <b id="error"> </b>
+    </form>
+
+    <!-- Div to display mouse position -->
+    <div id="mousePosition"></div>
+  </center>
+</body>
+</html>

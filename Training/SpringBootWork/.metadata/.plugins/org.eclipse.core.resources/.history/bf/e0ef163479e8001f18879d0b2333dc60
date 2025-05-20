@@ -1,0 +1,10 @@
+package in.sp.main.entity;
+
+public class Student 
+{
+	private long Id;
+	private String Name;
+	private Integer Age;
+	private String Branch;
+	
+}

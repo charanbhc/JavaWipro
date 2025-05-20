@@ -1,0 +1,47 @@
+package ShoppingSecuirty.ShoppingSecuirty;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/shopping")
+public class StoresInfo { 
+	@GetMapping("/stores")
+	public  String getStores() {
+		//Static HTML
+		String response="<html><body>";
+		response += "<B>List of stores</B><br>";
+		response += "<ol><li>Mumbai</li><li>Delhi</li>";
+		response += "<li>Kanpur<li><li>Mysore</li><li>Jaipur</li></ol>";
+		response += "<br><a href=/logout>Logout</a>";
+		response +="</body></html>";
+		return response;
+	}
+
+	@GetMapping(value="/products")
+	public  String getProducts() {
+		//Static HTML
+		String response="<html><body>";
+		response += "<B>List of stores</B><br>";
+		response += "<ol><li>Home Applicances</li><li>Delhi</li>";
+		response += "<li>Sports Kits<li><li>Educational Kits</li><li>Computers</li></ol>";
+		
+		response += "<br><a href=/logout>Logout</a>";
+		response +="</body></html>";
+		return response;
+	}
+	
+	@GetMapping("/users")
+	public  String getUsers() {
+		//Static HTML
+		String response="<html><body>";
+		response += "<B>List of stores</B><br>";
+		response += "<ol><li>User1</li><li>User1</li>";
+		response += "<li>User3<li><li>User4</li><li>User5</li></ol>";
+		
+		response += "<br><a href=/logout>Logout</a>";
+		response +="</body></html>";
+		return response;
+	}
+}

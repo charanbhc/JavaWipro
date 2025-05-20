@@ -1,0 +1,82 @@
+package RoyalEnfield.RoyalEnfield;
+ 
+import java.util.ArrayList;
+ 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+ 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+
+@RestController
+@RequestMapping("/Bikes")
+public class StoreInfo {
+ 
+	public ArrayList  <String>  bikesList=new ArrayList();
+	public StoreInfo() {
+		bikesList.add("Standard Bullet");
+		bikesList.add("Classic Bullet");
+		bikesList.add("Thunderbird");
+		bikesList.add("Cafe Racer");
+		bikesList.add("Continental GT");
+		bikesList.add("Interceptor");
+		bikesList.add("Meteor");
+	}
+	@GetMapping("/info")
+	public ResponseEntity<String> getStoreInfo(HttpServletRequest  request, 
+			HttpServletResponse response)
+	{
+		ResponseEntity  res=new ResponseEntity(bikesList, HttpStatus.OK);
+		System.out.println("Sent the list of bikes...");
+		return  res;
+	}
+}
+
+
+                // --->Notes<--//
+
+//	@GetMapping --> Specifically for GET requests    
+//  @RequestMapping ---> Can be used for GET, POST, PUT, DELETE, etc.
+
+//--->When Do We Need HttpServletResponse?
+
+//You should use HttpServletResponse response when:
+//
+//Manually setting response headers
+
+//response.setHeader("Custom-Header", "HeaderValue");
+
+//Redirecting to another URL
+//response.sendRedirect("https://example.com");
+
+//Setting cookies
+//Cookie cookie = new Cookie("username", "John");
+//response.addCookie(cookie);
+
+
+//When Do We Need HttpServletRequest?
+//You should use HttpServletRequest request when you need to access client-side request details, such as:
+//
+// Getting Query Parameters
+//Example: If the request URL is
+//GET /bikes/info?brand=RoyalEnfield
+
+// @RequestMapping(value = "/info")
+//public ResponseEntity<String> getStoreInfo(HttpServletRequest request) {
+//    String brand = request.getParameter("brand"); // Retrieves "RoyalEnfield"
+//    return ResponseEntity.ok("Requested brand: " + brand);
+//}
+
+
+// Getting Request Method (GET, POST, etc.)
+
+// @RequestMapping(value = "/info")
+// public ResponseEntity<String> getStoreInfo(HttpServletRequest request) {
+//    String method = request.getMethod(); // "GET", "POST", etc.
+//    return ResponseEntity.ok("Request method: " + method);
+//}
+

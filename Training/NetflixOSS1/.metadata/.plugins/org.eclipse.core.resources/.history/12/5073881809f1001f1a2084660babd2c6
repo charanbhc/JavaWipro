@@ -1,0 +1,8 @@
+server.port=8081
+spring.application.name=springmonitoring
+#Zipkin server supports upto 3 levels of statistics. Here we are setting for 1st level
+spring.sleuth.sampler.probability=1.0
+#Enabling zipkin to trace the API calls.
+spring.zipkin.enabled=true
+#Location of zipking server
+spring.zipkin.baseUrl=http://localhost:9411/

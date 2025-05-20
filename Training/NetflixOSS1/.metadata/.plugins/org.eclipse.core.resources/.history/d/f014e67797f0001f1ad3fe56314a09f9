@@ -1,0 +1,64 @@
+package RoyalEnfield.RoyalEnfield;
+
+import java.util.HashMap;
+import java.util.Scanner;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+@SpringBootApplication
+
+
+@EnableEurekaClient
+public class RoyalEnfield {
+
+	public static void main(String[] args) 
+	{
+		SpringApplication spr=new SpringApplication(RoyalEnfield.class); 
+		System.out.println("Enter port no "); 
+		Scanner scan=new Scanner(System.in);
+		int port=scan.nextInt();
+		HashMap portconf=new HashMap();
+		portconf.put("server.port", port);
+		spr.setDefaultProperties(portconf);
+		spr.run(args);
+	}
+
+}
+
+
+
+
+
+
+
+                      // --->Notes<--//
+
+/*--->EnableEurekaClient is mandatory for all applications registering in EurekaServer.
+ * This will application is assigned a name in the Eureka Server.
+ * That name is used to locate this client through Eureka Server.
+ */
+
+//--->Instead of using SpringApplication.run(RoyalEnfield.class, args); directly, SpringApplication spr=new SpringApplication(RoyalEnfield.class);
+//creates an instance of SpringApplication to have more control over application settings.
+
+//---> User runs the application.
+//It asks for a port number.
+//The entered port number is set dynamically.
+//Spring Boot starts the application on the given port.
+
+//--->Why Use Dynamic Port?
+//Avoid Port Conflicts: If 8080 (default) is busy, the user can enter another port.
+//Multiple Instances: Can run multiple instances of the same application on different ports.
+
+
+//Map<String, Object> portconf = new HashMap<>(); 
+//portconf.put("server.port", port);  // A HashMap is used to store the server port configuration dynamically.
+//spr.setDefaultProperties(portconf);
+//spr.run(args);
+//
+/*EnableEurekaClient is mandatory for all applications registering in EurekaServer.
+ * This will application is assigned a name in the Eureka Server.
+ * That name is used to locate this client through Eureka Server.
+ */
+//Starting tomcat Server, Build SpringBoot Application, Configure and deploy it.

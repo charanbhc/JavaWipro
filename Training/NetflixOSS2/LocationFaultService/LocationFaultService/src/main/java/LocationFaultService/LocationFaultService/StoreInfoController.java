@@ -1,0 +1,38 @@
+package LocationFaultService.LocationFaultService;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/Bikes")
+public class StoreInfoController 
+{
+	@Autowired
+	TestLocationService  locService;
+	
+	@GetMapping(value="/storeInfo")
+	public String getStoreInfo() 
+	{
+		return locService.getStoreInfo();
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*This contains the routing and ping logic.
+ * This has to be Autowired.
+ * Any Hystrix application will have customized routing logic.*/

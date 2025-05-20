@@ -1,0 +1,25 @@
+package in.sp.main.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import in.sp.main.entity.EmployeeEntity;
+import in.sp.main.repository.Repository;
+
+@Service
+
+public class Imp_EmployeeService implements EmployeeService {
+
+    @Autowired
+    private Repository repository;  
+
+    @Override
+    public double calculateBonus(long employeeId) {
+        return 5000; 
+    }
+
+    @Override
+    public EmployeeEntity addEmployee(EmployeeEntity employee) 
+    {
+        return repository.save(employee);
+    }
+}

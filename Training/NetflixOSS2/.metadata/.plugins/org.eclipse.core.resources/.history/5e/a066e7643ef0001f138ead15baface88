@@ -1,0 +1,61 @@
+package RoyalEnfield.RoyalEnfield;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+
+
+@SpringBootApplication
+@EnableEurekaClient                              //  Commented out, meaning this application is not registering itself with an Eureka server.
+public class RoyalEnfield                          //  Main Class & Dynamic Port Selection
+{
+	public static void main(String[] args) 
+	{
+		SpringApplication spr=new SpringApplication(RoyalEnfield.class); //2nd way   // 1st way --> SpringApplication.run(RoyalEnfield.class) 
+		System.out.println("Enter port no "); 
+		Scanner scan=new Scanner(System.in);
+		int port=scan.nextInt();                       // The user is prompted to enter a port number, which will be used to run the Spring Boot
+		HashMap portconf=new HashMap(); 
+		portconf.put("server.port", port);             // A HashMap is used to store the server port configuration dynamically.
+		spr.setDefaultProperties(portconf);            // This method sets the port dynamically so that the application starts on the user-defined port.
+		spr.run(args);                                 // start the tomcat server here 
+	}
+
+}
+
+
+
+
+
+
+
+                      // --->Notes<--//
+
+/*--->EnableEurekaClient is mandatory for all applications registering in EurekaServer.
+ * This will application is assigned a name in the Eureka Server.
+ * That name is used to locate this client through Eureka Server.
+ */
+
+//--->Instead of using SpringApplication.run(RoyalEnfield.class, args); directly, SpringApplication spr=new SpringApplication(RoyalEnfield.class);
+//creates an instance of SpringApplication to have more control over application settings.
+
+//---> User runs the application.
+//It asks for a port number.
+//The entered port number is set dynamically.
+//Spring Boot starts the application on the given port.
+
+//--->Why Use Dynamic Port?
+//Avoid Port Conflicts: If 8080 (default) is busy, the user can enter another port.
+//Multiple Instances: Can run multiple instances of the same application on different ports.
+
+
+//Map<String, Object> portconf = new HashMap<>(); 
+//portconf.put("server.port", port);  // A HashMap is used to store the server port configuration dynamically.
+//spr.setDefaultProperties(portconf);
+//spr.run(args);
+//
+

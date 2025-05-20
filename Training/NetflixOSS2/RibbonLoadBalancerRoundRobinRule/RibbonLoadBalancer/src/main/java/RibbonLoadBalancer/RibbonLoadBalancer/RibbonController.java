@@ -1,0 +1,120 @@
+package RibbonLoadBalancer.RibbonLoadBalancer;
+
+import java.net.URI;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+
+@RestController
+@RequestMapping("/Bikes")
+public class RibbonController 
+{
+	@Autowired
+	private LoadBalancerClient  balance;
+	
+	private RestTemplate resttemp=new RestTemplate();
+	
+	@GetMapping("/info")
+	public String getAllBikes()
+	{
+		ServiceInstance instance=balance.choose("balanceload");  
+		URI  products = URI.create(String.format("http://%s:%s", instance.getHost(), instance.getPort()));
+		System.out.println("routing to - " + products.getHost() + " : " + products.getPort()); 
+		
+		String result="<B>Data returned by </b>" + products.getHost() + " : " + 
+		products.getPort() + "<BR>"; 
+		String url=products.toString() + "/Bikes/info";
+		try 
+		{
+			result += resttemp.getForObject( url, String.class);
+		} 
+		catch(Exception e) 
+		{
+			System.out.println("Unable to contact service @ " + products);
+		}	
+		return result;	
+	}
+}
+
+
+
+
+
+
+
+
+
+// ----> Notes <----
+
+//---> This class contains the methods for load balancing. It contains the code to perform actual load balancing
+// It uses server information that is given in application.properties file and finally it select the server having less load.
+
+//---> The LoadBalancerClient is injected here using @Autowired.
+// It is responsible for selecting an instance of the service dynamically based on the load-balancing strategy (by default, Round-Robin).
+
+//---> RestTemplate resttemp=new RestTemplate();
+// RestTemplate is used to make REST API calls to the selected instance(means REST API calls for select server)
+
+//---> ServiceInstance instance = balance.choose("balanceload");  Load Balancer Selects a Server
+// The choose() method picks one available instance of the service "balanceload". Example: It may select localhost:10080
+
+//---> URI products = URI.create(String.format("http://%s:%s", instance.getHost(), instance.getPort()));
+// If the selected server is running on localhost:10080, the products URI will be: 👉 http://localhost:10080
+
+//---> String url = products.toString() + "/Bikes/info";  result += resttemp.getForObject(url, String.class);
+// This sends a GET request to http://localhost:10080/Bikes/info and fetches the response.
+// products.toString() converts the products URI object to a string("http://localhost:10080") and after adding url = "http://localhost:10080/Bikes/info".
+// The resttemp.getForObject(url, String.class) is a Spring RestTemplate method used to send an HTTP GET request to the specified url and 
+// retrieve a response as a String
+
+// ---> Conclusion
+//The RestTemplate is responsible for calling the selected server.
+//The LoadBalancerClient ensures that requests are distributed across multiple instances.
+//If one instance is down, the load balancer selects another available instance.
+//The response from the server is returned as a String. The += operator appends the response to the result variable.
+
+
+// ---> Example Execution
+
+//Assume we have three instances of the Bikes Service running on different ports:
+//localhost:10080, localhost:11080, localhost:12080
+//Now, let’s assume that the Load Balancer picks localhost:10080.
+//How the Code Works Step-by-Step
+
+//1️. Choosing a Service Instance:
+//ServiceInstance instance = balance.choose("balanceload");  
+//Load Balancer selects localhost:10080.
+
+//2️. Creating the URL:
+//URI products = URI.create(String.format("http://%s:%s", instance.getHost(), instance.getPort()));
+//products.toString() becomes "http://localhost:10080".
+
+//3️ Final URL for API Call:
+//String url = products.toString() + "/Bikes/info";
+//url = "http://localhost:10080/Bikes/info"
+
+//4️ Sending the HTTP GET Request:
+//result += resttemp.getForObject(url, String.class);
+//Calls http://localhost:10080/Bikes/info.
+//If this instance is running, it returns:json
+//["Standard Bullet", "Classic Bullet", "Thunderbird"]
+//This response is stored in result.
+
+//What If the Selected Instance is Down?
+//If the instance http://localhost:10080 is not running, the call will fail. The program will enter the catch block:
+
+//catch(Exception e) {System.out.println("Unable to contact service @ " + products);}
+//The system will not crash, but it will print an error message.
+
+
+//---> Conclusion
+//1️ Load Balancer Selects a Server	Picks a service instance dynamically (e.g., http://localhost:10080).
+//2️ RestTemplate Sends HTTP GET Request	Sends a request to /Bikes/info.
+//3️ Server Handles Request	Responds with bike information (e.g., "Standard Bullet, Classic Bullet, Thunderbird").
+//4️ Client Receives Response	Stores and prints the result.
+//🚨 If Server is Down	Catches the exception and prints an error message.

@@ -1,0 +1,105 @@
+package LocationFaultService.LocationFaultService;
+ 
+ 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
+ 
+@Configuration
+@Service
+public class TestLocationService 
+{
+	@Autowired
+	RestTemplate  resttemp;
+
+	@HystrixCommand(fallbackMethod="callCopy2at11080", commandProperties={@HystrixProperty(name="execution.isolation.thread.timeoutInMilliseconds",value="5000")})
+	public  String getStoreInfo() 
+	{
+		System.out.println("Trying to ping to localhost:10080");
+		String res=resttemp.exchange("http://localhost:10080/Bikes/info",HttpMethod.GET,null, java.lang.String.class).getBody();
+		System.out.println("Got the response from localhost:10080");
+		return res;
+	}
+	
+	@HystrixCommand(fallbackMethod="callCopy3at12080", commandProperties={@HystrixProperty(name="execution.isolation.thread.timeoutInMilliseconds",value="5000")})
+	private String callCopy2at11080()
+	{
+		System.out.println("Pinging to alternate @ 11080");
+		String res=resttemp.exchange("http://localhost:11080/Bikes/info",HttpMethod.GET,null, java.lang.String.class).getBody();
+		System.out.println("Got the response");
+		return res;
+	}
+	
+	@HystrixCommand(fallbackMethod="serviceUnavailable", commandProperties={@HystrixProperty(name="execution.isolation.thread.timeoutInMilliseconds",value="5000")})
+	private String callCopy3at12080() 
+	{
+		System.out.println("Pinging to alternate @ 12080");
+		String res=resttemp.exchange("http://localhost:12080/Bikes/info",HttpMethod.GET,null, java.lang.String.class).getBody();
+		System.out.println("Got the response");
+		return res;
+	}
+	
+	private String serviceUnavailable() 
+	{
+	    System.out.println("All instances are down. Returning fallback response.");
+	    return "Service not available currently...";
+	}
+	
+	@Bean
+	public RestTemplate  resttemp() 
+	{
+		return  new RestTemplate();
+	}
+}
+ 
+
+
+
+
+
+
+
+
+//---> Notes<---
+
+// This class implements a fault-tolerant microservice using Hystrix Circuit Breaker. It ensures service availability even 
+// if one or more backend services fail. This class is responsible for:
+//✅ Handling service failures using Hystrix circuit breaker
+//✅ Calling alternate services if the primary service is down
+//✅ Returning a fallback response when all services are unavailable
+
+
+// @HystrixCommand: Defines a method with a circuit breaker.
+// @HystrixProperty: Configures timeout settings for the circuit breaker.
+
+/*
+ *---> Line 21
+ * This annotation is from the Hystrix library, which helps in
+ * handling failures in a micro-services environment.
+ * 
+ * fallbackMethod="callCopy2at11080" If the getStoreInfo() method fails (due to
+ * timeout or server unavailability), the callCopy2at11080() method will be called instead. 
+ * 
+ * execution.isolation.thread.timeoutInMilliseconds=5000 This
+ * sets the timeout limit for the request to 5000 milliseconds (5 seconds). If the request
+ * does not return a response within 5 seconds, Hystrix will automatically trigger the fallback method.
+ */
+
+/*
+ * ---->Line 25 resttemp.exchange() The method call is using Spring's RestTemplate to send an HTTP request and receive a response
+ * It Call the micro-service API ( "http://localhost:10080/Bikes/info") using a RestTemplate object and sore it to string res.
+ * The exchange() method in RestTemplate is a powerful method used to make RESTful HTTP requests. 
+ * It provides more control over the request than simpler methods.
+ * 
+ *  URL--> The URL of the API to which the request is sent.
+ *  method-->	The HTTP method (GET, POST, PUT, DELETE, etc.).
+ *  requestEntity-->	Represents the HTTP request body and headers. It can be null if not required.
+ *  responseType-->	The class type of the expected response (e.g., String.class). Here java.lang.String.class --> This tells RestTemplate that the response should be parsed as a String.
+ *  uriVariables-->	Optional path variables if the URL has placeholders ({} placeholders).
+ */

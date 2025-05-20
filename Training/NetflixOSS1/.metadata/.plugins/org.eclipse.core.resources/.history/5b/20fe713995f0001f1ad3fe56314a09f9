@@ -1,0 +1,72 @@
+package LookUpEureka.LookUpEureka;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+
+@RestController
+@RequestMapping("/Bikes")
+public class LookUpController {
+
+	@Autowired
+	RestTemplate  resttemp;
+	
+	@Bean
+	//Among the 3 RoyalEnfield services, only one will be selected and the request is routed to that
+	//service
+	@LoadBalanced
+	public RestTemplate  resttemp() {
+		return new RestTemplate();
+	}
+	
+	@GetMapping("/info")
+	public String getStoreInfo() {
+		/*Lookup URL for looking up/searching for PizzaHut.
+		 * URL - http://RoyalEnfield/Bikes/info
+		 * This has 2 parts
+		 * 			LookUp and Discover
+		 * 			Contact
+		 * 
+		 * 	LookUp for http://RoyalEnfield
+		 * 	Discovered - http://192.168.1.5:9020/
+
+		 * 		Append the endpoint /Bikes/info to the discovery and get the full url http://192.168.1.5:9020/Bikes/info
+		 * 
+		 * Call http://192.168.1.5:9020/Bikes/info and get the response and store it in ResponseEntity object
+		 * Retrieve the contents of the response and send it to the browser.
+		 * */
+		ResponseEntity<String> res=resttemp.exchange("http://RoyalEnfield/Bikes/info", HttpMethod.GET, 
+				null, String.class);
+		
+		System.out.println("Calling/Contacting RoyalEnfield");
+		return res.getBody();
+	}
+
+	@GetMapping("/PizzaHut")
+	public String lookUpPizzaHut() {
+		/*Lookup URL for looking up/searching for PizzaHut.
+		 * URL - http://PizzaHut/pizzas/info
+		 * This has 2 parts
+		 * 			LookUp and Discover
+		 * 			Contact
+		 * 
+		 * 	LookUp for http://PizzaHut
+		 * 	Discovered - http://192.168.1.5:9020/
+
+		 * 		Append the endpoint /pizzas/info to the discovery and get  http://192.168.1.5:9020/pizzas/info
+		 * 
+		 * Call http://192.168.1.5:9020/pizzas/info and get the response and store it in ResponseEntity object
+		 * Retrieve the contents of the response and send it to the browser.
+		 * */
+		ResponseEntity<String> res=resttemp.exchange("http://PizzaHut/pizzas/info", HttpMethod.GET, 
+				null, String.class);
+		System.out.println("Calling/Contacting PizzaHut");
+		return res.getBody();
+	}
+}

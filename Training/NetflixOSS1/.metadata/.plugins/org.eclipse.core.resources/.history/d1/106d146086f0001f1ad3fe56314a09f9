@@ -1,0 +1,26 @@
+spring.application.name=LookUpEureka
+server.port=9001
+eureka.instance.hostname= ${vcap.application.uris[0]:localhost}
+eureka.instance.prefer-ip-address=true
+eureka.instance.lease-renewal-interval-in-seconds=100
+eureka.instance.lease-expiration-duration-in-seconds=100
+eureka.client.service-url.defaultZone=http://localhost:8761/eureka
+
+
+
+
+
+
+
+
+
+
+
+
+#location of Eureka Server
+#Every client is registered for some duration only. After that duration, it has to reregister
+#This specifies the time in which the client has to re-register
+#This means you will ip-address to connect to the Eureka Server.
+#Duration of registration in seconds 
+#URL of the Eureka Server. This client uses this URL to contact Eureka Server and register. 
+

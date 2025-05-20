@@ -1,0 +1,30 @@
+package LookUpEureka.LookUpEureka;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+
+@SpringBootApplication
+@EnableEurekaClient
+public class LookUpEurekaApplication 
+{
+	public static void main(String[] args) 
+	{
+		SpringApplication.run(LookUpEurekaApplication.class, args);
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+//---> Notes <---
+
+// A Eureka Client is a microservice that registers itself with the Eureka Server and fetches service details from it.

@@ -1,0 +1,41 @@
+<html>
+<head>
+<script>
+	function GoBack ()
+	{
+		window.history.go (-1);
+	}
+</script>
+</head>
+<body onclick="GoBack()">
+
+
+<script type="text/javascript">
+i = 0
+function GenI ()
+{
+	while (i <= 5)
+	{
+		document.write("The number is " + i)
+		document.write("<br>")
+		i++
+	}
+	window.alert ("Continue....");
+		window.history.go (-1);
+}
+</script>
+
+<p>Explanation:</p>
+
+<p><b>i</b>  equal to 0.</p>
+
+<p>While <b>i</b> is less than , or equal to, 5, the loop will continue to run.</p>
+
+<p><b>i</b> will increase by 1 each time the loop runs.</p>
+<B>The value of I is <script> document.writeln(i);</script>
+
+</body>
+<input type="button" value="Submit" onclick = "GenI ()" />
+
+</html>
+

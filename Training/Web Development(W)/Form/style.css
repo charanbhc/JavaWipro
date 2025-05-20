@@ -1,0 +1,27 @@
+div{background-color:orange;width:1000px;height:800px; border-style:groove;border-width:3px;border-color:teal;border-radius:7px;
+}
+p{
+letter-spacing:1px;text-align:center;text-decoration:underline;border-style:groove;border-width:3px;border-color:blue;border-radius:7px;
+padding:5px;line-height:30px;margin:20px;
+} 
+form {
+	align-self: center;
+}
+ 
+input [type="number"] {
+	width: 350px
+}
+
+#projectForm{
+    margin:20px;
+    padding-top: 40px;;
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-bottom: 20px;
+    border: 2px solid black;
+    border-radius: 8px;
+}
+      
+div,img{
+   width: 100%;
+}

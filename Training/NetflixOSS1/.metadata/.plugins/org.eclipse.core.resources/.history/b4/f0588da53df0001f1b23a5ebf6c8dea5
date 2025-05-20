@@ -1,0 +1,9 @@
+server.port=8761
+#Prevent the internal services of Eureka Server like DNS,loopback and naming services from
+#registering with Eureka Server
+eureka.client.registerWithEureka=false
+#Prevent clients from downloading a copy of this registry.
+eureka.client.fetchRegistry=false
+#Service URL that the clients has to use to access Eureka Server
+#End point name is user defined.
+eureka.client.serviceUrl.defaultZone=http://localhost:8761/eureka/

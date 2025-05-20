@@ -1,0 +1,39 @@
+package CartZoolGateway.CartZoolGateway;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class RouteController 
+{
+	// proxy api to find client information.
+	
+	@GetMapping("/show")
+	public String showItems(HttpServletRequest request,HttpServletResponse response)
+	{
+		// HttpServletRequest represents the request packet.
+		// Capture information about the client.
+		
+		System.out.println("Client Machine :" + request.getRemoteHost());
+		System.out.println("Client Address :" + request.getRemoteAddr());
+		System.out.println("Client Browser :" + request.getHeader("user-agent"));
+		String clientinfo=request.getHeader("user-agent");
+		if(clientinfo.indexOf("Android") >=0 || clientinfo.indexOf("IPhone") >=0)
+		{
+			System.out.println("Access from mobile device are not allowed");
+			return "<b>Access from mobile device are not allowed </b>";
+		}
+		else
+		{
+			RequestDispatcher rdispatch=request.getRequestDispatcher("http://localhost:9001/show");
+			=null;
+			// call the api
+			rdispatch.include(request, response);
+			return "<b>Redirecting.....</b>";
+		}
+	}
+}

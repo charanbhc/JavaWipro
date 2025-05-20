@@ -1,0 +1,73 @@
+package ShoppingSecuirty.ShoppingSecuirty;
+import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+@Configuration //Read the configuration info from properties file and auto-configure itself.
+@EnableWebSecurity //This will enable the login authentication through the browser.
+//You will get a login page that is connected to the database through this code.
+public class Authenticate  extends WebSecurityConfigurerAdapter{
+	@Value("${spring.datasource.driverClassName}")
+	private String databaseDriverClassName;
+	@Value("${spring.datasource.url}")
+	private String datasourceUrl;
+	@Value("${spring.datasource.username}")
+	private String databaseUsername;
+	@Value("${spring.datasource.passwd}")
+	private String databasePassword;
+	@Autowired
+	DataSource  ds;//It will be populated with username,password and the database url.
+	
+	@Autowired
+	public void configAuthentication(AuthenticationManagerBuilder  amb) throws Exception
+	{
+		amb.jdbcAuthentication().dataSource(ds);
+	}
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+	    //return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+		return NoOpPasswordEncoder.getInstance();
+	}
+	
+	/*public  void configure(HttpSecurity http) throws Exception
+	//HttpSecurity is used if url consists of http protocol. http://localhost:9080/stores
+	{
+		System.out.println("*****");
+		//http://localhost:9080/ any user can give this url.
+		
+
+		//http://localhost:9080/stores  can be accessed by USERS and Administrators
+		http.authorizeRequests().antMatchers("/").
+		hasAnyRole("USER", "ADMIN").antMatchers("/stores").
+		hasAnyRole("USER", "ADMIN").antMatchers("/products").
+		hasAnyRole("USER", "ADMIN").antMatchers("/users").
+		hasRole("USER").anyRequest().
+		authenticated().and().formLogin().
+		permitAll().and().logout().permitAll().and().
+		exceptionHandling().accessDeniedPage("/403");
+		
+		//csrf - cross-site scripting reference.
+		http.csrf().disable();
+		
+	}*/
+
+	@Bean
+	public DataSource datasource() {
+	    DriverManagerDataSource ds = new DriverManagerDataSource();
+	    ds.setDriverClassName(databaseDriverClassName);
+	    ds.setUrl(datasourceUrl);
+	    ds.setUsername(databaseUsername);
+	    ds.setPassword(databasePassword);
+	    return ds;
+	}
+}

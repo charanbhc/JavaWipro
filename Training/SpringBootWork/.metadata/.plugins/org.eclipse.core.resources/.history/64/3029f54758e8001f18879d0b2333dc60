@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Welcome</title>
+</head>
+<body>
+    <h2>Welcome to Student Portal</h2>
+    <a th:href="@{/signup}"><button>New User</button></a>
+    <a th:href="@{/signin}"><button>Existing User</button></a>
+</body>
+</html>

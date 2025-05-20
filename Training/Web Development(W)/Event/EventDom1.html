@@ -1,0 +1,56 @@
+<!DOCTYPE html><html><head>
+    <title>Java script events</title>
+    </head>
+    <script>
+        //javascript functions. Use function keyword to create a function.
+        function changeStyle(){
+            console.log("Changing the style..... got the focus");
+            //document.forms[0]  -  1st form with 0 index
+            // document is an object with represent body.
+            document.forms[0].playerName.style.backgroundColor="red";
+        }
+        function undoStyle(){
+            console.log("Lost the focus... Undoing the style.")
+            document.forms[0].playerName.style.backgroundColor="white";
+        }
+        function checkLength(){
+            //Retrieve the value of the player name. Follow the absolute path
+            var  pName=document.forms[0].playerName.value
+            var v=document.getElementById("error")
+            if (pName.length <3 ){
+                //search for a tag having the id called error. In CSS3, we use #.
+                //for ex:  #error{color:"red"}
+                //v is a pointer to error(<b> tag).
+                //Dynamic content.
+                v.innerHTML="Length of name must be more than or equal to 3";
+                v.style.color="red"; //In CSS3, #error{color:"red"}
+            }else
+            {
+                //Dynamic content.
+                v.innerHTML="Perfect....";
+                v.style.color="green"; //In CSS3, #error{color:"green"}
+            }
+        }
+        function closeWindow(){
+            if(window.confirm("Do you wish to close ?"))
+                window.alert("You are closing....");
+            else
+                console.log("Thanks for continuing....")
+        }
+        function trackMouse(){
+            document.getElementById("pos").innerHTML=window.event.screenX + ", " + window.event.screenY
+        }
+    </script>
+    <body  onclose="closeWindow()"  onmousemove="trackMouse()"><center>
+    <form>
+    <label id="jevents">Javascript events</label><br><br>
+    <label>Font size</label>&nbsp;&nbsp;<input type="number" value=10 min=10 max=75  /><br><br>
+    <!-- Event handling -->
+    <input type="text" value="Unknown" name="playerName" onfocus="changeStyle()" onblur="undoStyle()" 
+                oninput="checkLength()"  />
+    <!-- static content -->
+    <b id="error">Length must be more than 3 characters....</b><br><br>
+    <label id="pos" ></label>
+    </form></center>
+    </body>
+    </html>

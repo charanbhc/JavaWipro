@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move package &apos;in.sp.main.entity&apos; to &apos;SpringBootP13/src/main/java/in.sp.main&apos;&#x0D;&#x0A;- Original project: &apos;SpringBootP12&apos;&#x0D;&#x0A;- Destination element: &apos;SpringBootP13/src/main/java/in.sp.main&apos;&#x0D;&#x0A;- Original element: &apos;SpringBootP12/src/main/java/in.sp.main.entity&apos;&#x0D;&#x0A;- Update references to refactored element" description="Move package" destination="=SpringBootP13/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;in.sp.main" element1="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;in.sp.main.entity" flags="589830" fragments="1" id="org.eclipse.jdt.ui.move" policy="org.eclipse.jdt.ui.movePackages" stamp="1738654775191" version="1.0"/>
+</session>

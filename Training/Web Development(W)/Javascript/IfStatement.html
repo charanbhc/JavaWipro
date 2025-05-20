@@ -1,0 +1,32 @@
+<html>
+<body>
+
+<script >
+var d = new Date();
+var time = d.getHours();
+
+document.writeln ("Time : ");
+if (time < 12 )
+	document.write("<b>Good morning</b>");
+else if (time >= 12 && time < 16)
+	document.write ("<B>Good AfterNoon<B>");
+else if (time >= 16 && time < 19 )
+	document.write ("<B>Good Evening<B>");
+else if (time >= 19)
+	document.write ("<B>Good Night</B>");
+
+
+</script>
+
+<p>
+This example demonstrates the If statement.
+</p>
+
+<p>
+If the time on your browser is less than 12,
+you will get a "Good morning" greeting.
+</p>
+
+</body>
+</html>
+
